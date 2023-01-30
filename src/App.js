@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import { Button, Card, Grid, CardContent,TextField } from '@mui/material';
+import { Button, Card, Grid, CardContent,TextField} from '@mui/material';
 import bingoItems from './bingoItems.json';
 import styled from 'styled-components';
 import BingoHeader from './components/bingoHeader';
@@ -98,8 +98,12 @@ class App extends React.Component {
       default:
         renderRow = rowOne;
       }
-    return (   
-      <Grid container justify="center" alignItems="center" alignContent="center" spacing={3}>
+    return ( 
+      <Grid container direction="row" justifyContent="center" alignItems="center" spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
+        {Array.from(Array(6)).map((_, index) => (
+          <Grid item xs={2} sm={4} md={4} key={index}>
+      </Grid>
+        ))}
         {renderRow.map(item => {
           const id = item.id;
           const nameId = "name" + id;
