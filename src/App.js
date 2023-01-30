@@ -1,8 +1,8 @@
 import React from 'react';
 import './App.css';
-import { Typography, Card, Grid, CardContent,TextField, Button } from '@material-ui/core';
+import { Button, Card, Grid, CardContent,TextField } from '@mui/material';
 import bingoItems from './bingoItems.json';
-import { styled } from '@material-ui/core/styles';
+import styled from 'styled-components';
 import BingoHeader from './components/bingoHeader';
 
 const BingoBox = styled(Card)({
@@ -119,8 +119,8 @@ class App extends React.Component {
             buttonText = "Save";
             results = 
               <>
-                <Typography variant='body1'>{this.state[nameId]}</Typography>
-                <Typography variant="body1">{this.state[emailId]}</Typography>
+                <body variant='body1'>{this.state[nameId]}</body>
+                <body variant="body1">{this.state[emailId]}</body>
               </>
           
             return (
@@ -138,8 +138,8 @@ class App extends React.Component {
           } else {
             results = 
               <>
-                <Typography variant='body1'>{this.state[nameId]}</Typography>
-                <Typography variant="body1">{this.state[emailId]}</Typography>
+                <body variant='body1'>{this.state[nameId]}</body>
+                <body variant="body1">{this.state[emailId]}</body>
               </>
 
             if (this.state[id] === false) {
