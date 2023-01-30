@@ -1,8 +1,8 @@
 import React from 'react';
 import './App.css';
-import { Typography, Card, Grid, CardContent,TextField, Button } from '@material-ui/core';
+import { Button, Card, Grid, CardContent,TextField} from '@mui/material';
 import bingoItems from './bingoItems.json';
-import { styled } from '@material-ui/core/styles';
+import styled from 'styled-components';
 import BingoHeader from './components/bingoHeader';
 
 const BingoBox = styled(Card)({
@@ -98,8 +98,12 @@ class App extends React.Component {
       default:
         renderRow = rowOne;
       }
-    return (   
-      <Grid container justify="center" alignItems="center" alignContent="center" spacing={6}>
+    return ( 
+      <Grid container direction="row" justifyContent="center" alignItems="center" spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
+        {Array.from(Array(6)).map((_, index) => (
+          <Grid item xs={2} sm={4} md={4} key={index}>
+      </Grid>
+        ))}
         {renderRow.map(item => {
           const id = item.id;
           const nameId = "name" + id;
@@ -107,30 +111,22 @@ class App extends React.Component {
           let results;
           let buttonText;
 
-          // X On page load, state[id] is false
-            // display input fields and update name and emailID
-
-          // X Once saved
-            // only display results, no button or input fields
-
-          // they can click the saved results Card to fade it out 
-
           if (((this.state[nameId] === null || this.state[emailId] === null))) {
             buttonText = "Save";
             results = 
               <>
-                <Typography variant='body1'>{this.state[nameId]}</Typography>
-                <Typography variant="body1">{this.state[emailId]}</Typography>
+                <body variant='body1'>{this.state[nameId]}</body>
+                <body variant="body1">{this.state[emailId]}</body>
               </>
           
             return (
               <Grid item xs={3} key={item.id}>
                 <BingoBox id={id}>
                   <CardContent>
-                  <TextField id={"name" + id} label="Enter Category"></TextField>
-                  <TextField id={"email" + id} label="Enter Driver"></TextField>
+                  <TextField color="warning" variant="standard" id={"name" + id} label="Enter Category"></TextField>
+                  <TextField color="warning" variant="standard" id={"email" + id} label="Enter Driver"></TextField>
                   {results}
-                  <Button id={"button" + item.id} onClick={this.saveCard}>{buttonText}</Button>
+                  <Button color="inherit" variant="text" id={"button" + item.id} onClick={this.saveCard}>{buttonText}</Button>
                   </CardContent>
                 </BingoBox>
                 </Grid>
@@ -138,8 +134,8 @@ class App extends React.Component {
           } else {
             results = 
               <>
-                <Typography variant='body1'>{this.state[nameId]}</Typography>
-                <Typography variant="body1">{this.state[emailId]}</Typography>
+                <body>{this.state[nameId]}</body>
+                <body>{this.state[emailId]}</body>
               </>
 
             if (this.state[id] === false) {
