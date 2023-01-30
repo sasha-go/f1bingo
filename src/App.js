@@ -99,21 +99,13 @@ class App extends React.Component {
         renderRow = rowOne;
       }
     return (   
-      <Grid container justify="center" alignItems="center" alignContent="center" spacing={6}>
+      <Grid container justify="center" alignItems="center" alignContent="center" spacing={3}>
         {renderRow.map(item => {
           const id = item.id;
           const nameId = "name" + id;
           const emailId = "email" + id;
           let results;
           let buttonText;
-
-          // X On page load, state[id] is false
-            // display input fields and update name and emailID
-
-          // X Once saved
-            // only display results, no button or input fields
-
-          // they can click the saved results Card to fade it out 
 
           if (((this.state[nameId] === null || this.state[emailId] === null))) {
             buttonText = "Save";
@@ -127,10 +119,10 @@ class App extends React.Component {
               <Grid item xs={3} key={item.id}>
                 <BingoBox id={id}>
                   <CardContent>
-                  <TextField id={"name" + id} label="Enter Category"></TextField>
-                  <TextField id={"email" + id} label="Enter Driver"></TextField>
+                  <TextField color="warning" variant="standard" id={"name" + id} label="Enter Category"></TextField>
+                  <TextField color="warning" variant="standard" id={"email" + id} label="Enter Driver"></TextField>
                   {results}
-                  <Button id={"button" + item.id} onClick={this.saveCard}>{buttonText}</Button>
+                  <Button color="inherit" variant="text" id={"button" + item.id} onClick={this.saveCard}>{buttonText}</Button>
                   </CardContent>
                 </BingoBox>
                 </Grid>
@@ -138,8 +130,8 @@ class App extends React.Component {
           } else {
             results = 
               <>
-                <body variant='body1'>{this.state[nameId]}</body>
-                <body variant="body1">{this.state[emailId]}</body>
+                <body>{this.state[nameId]}</body>
+                <body>{this.state[emailId]}</body>
               </>
 
             if (this.state[id] === false) {
