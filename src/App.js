@@ -239,7 +239,7 @@ class App extends React.Component {
           <Grid item xs={2} sm={4} md={4} key={index}>
       </Grid>
         ))}
-        {renderRow.map(item => {
+        {renderRow.map((item) => {
           const id = item.id;
           const categoryId = "category" + id;
           const driverId = "driver" + id;
@@ -310,7 +310,7 @@ class App extends React.Component {
                 </BingoBox>
               </Grid>
             )
-          } else if (this.state[categoryId] !== "" || this.state[driverId] !== "") {
+          } else {
             // Categories and drivers are selected
             results = 
               <>
@@ -343,11 +343,8 @@ class App extends React.Component {
                   </CheckedBingoBox>
                 </Grid>
               )
-            }
-            
-          } else {
-            
-          }
+            } 
+          }  
         })
       }
       </Grid>
