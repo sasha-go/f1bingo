@@ -229,7 +229,7 @@ class App extends React.Component {
           const driverId = "driver" + id;
           let results;
 
-          // Start Game - no categories or drivers chosen yet
+          // Start Game - no categories or drivers chosen
           if (((this.state[categoryId] === "" || this.state[driverId] === undefined))) {
             results = 
               <>
