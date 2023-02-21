@@ -179,22 +179,6 @@ class App extends React.Component {
     this.setState({[id]: false})
   }
 
-  // saveCard = e => {
-  //   e.preventDefault()
-  //   const itemId = e.currentTarget.id.slice(-1);
-  //   console.log("item:" + itemId);
-  //   const categoryId = "category" + itemId;
-  //   const driverId = "driver" + itemId;
-  //   const categoryInput = this.state[categoryId].value;
-  //   console.log("category:" + categoryId);
-  //   console.log("categoryValue:" + categoryInput);
-  //   const driverInput = document.getElementById(driverId).value;
-  //   console.log("driver:" + driverId);
-  //   console.log("driverValue:" + driverInput);
-
-
-  //   this.setState({[categoryId]: categoryInput, [driverId]: driverInput})
-  // }
   saveCard = e => {
     e.preventDefault()
     const itemId = e.currentTarget.id.slice(-1);
