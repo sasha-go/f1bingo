@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import { Button, Card, Grid, CardContent, MenuItem, TextField} from '@mui/material';
+import { Card, Grid, CardContent, MenuItem, TextField} from '@mui/material';
 import bingoItems from './bingoItems.json';
 import styled from 'styled-components';
 import BingoHeader from './components/bingoHeader';
@@ -246,7 +246,7 @@ class App extends React.Component {
           let results;
 
           // Start Game - no categories or drivers chosen yet
-          if (((this.state[categoryId] === "" || this.state[driverId] === ""))) {
+          if (((this.state[categoryId] === "" || this.state[driverId] === undefined))) {
             results = 
               <>
                 <body variant="body1">{this.state[driverId]}</body>
