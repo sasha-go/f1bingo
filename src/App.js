@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import { Button, Card, Grid, CardContent,TextField} from '@mui/material';
+import { Button, Card, Grid, CardContent, MenuItem, TextField} from '@mui/material';
 import bingoItems from './bingoItems.json';
 import styled from 'styled-components';
 import BingoHeader from './components/bingoHeader';
@@ -29,6 +29,114 @@ const CheckedBingoBox = styled(Card)({
   opacity: 1,
 })
 
+const selectCategoryItems = [
+  {
+    id: 0,
+    value: "Top 5",
+  },
+  {
+    id: 1,
+    value: "Midfield",
+  },
+  {
+    id: 2,
+    value: "Bottom 5",
+  },
+  {
+    id: 3,
+    value: "First or Pole",
+  },
+  {
+    id: 4,
+    value: "Second",
+  },
+  {
+    id: 5,
+    value: "Third",
+  },
+  {
+    id: 6,
+    value: "DNF",
+  },
+  {
+    id: 7,
+    value: "Beat Teammate",
+  },
+  {
+    id: 8,
+    value: "Shortest Pit Stop",
+  },
+  {
+    id: 9,
+    value: "Select Category",
+  },
+];
+
+const selectDriverItem = [
+  {
+    value: "Max Verstappen",
+  },
+  {
+    value: "Sergio Perez",
+  },
+  {
+    value: "Charles LeClerc",
+  },
+  {
+    value: "Carlos Sainz",
+  },
+  {
+    value: "George Russell",
+  },
+  {
+    value: "Lewis Hamilton",
+  },
+  {
+    value: "Pierre Gasly",
+  },
+  {
+    value: "Oscar Piastri",
+  },
+  {
+    value: "Lando Norris",
+  },
+  {
+    value: "Valtteri Bottas",
+  },
+  {
+    value: "Zhou Guanyu",
+  },
+  {
+    value: "Lance Stroll",
+  },
+  {
+    value: "Fernando Alonso",
+  },
+  {
+    value: "Kevin Magnussen",
+  },
+  {
+    value: "Nico Hulkenberg",
+  },
+  {
+    value: "Nyck De Vries",
+  },
+  {
+    value: "Yuki Tsunoda",
+  },
+  {
+    value: "Alexander Albon",
+  },
+  {
+    value: "Logan Sargeant",
+  },
+  {
+    value: "Back up driver",
+  },
+  {
+    value: "Select Driver",
+  },
+];
 class App extends React.Component {
 
   constructor(props) {
@@ -46,18 +154,18 @@ class App extends React.Component {
       9: false,
       10: false,
       11: false,
-      "name0": null,
-      "name1": null,
-      "name2": null,
-      "name3": null,
-      "name4": null,
-      "name5": null,
-      "name6": null,
-      "name7": null,
-      "name8": null,
-      "name9": null,
-      "name10": null,
-      "name11": null
+      "category0": "",
+      "category1": "",
+      "category2": "",
+      "category3": "",
+      "category4": "",
+      "category5": "",
+      "category6": "",
+      "category7": "",
+      "category8": "",
+      "category9": "",
+      "category10": "",
+      "category11": "",
     };
   }
 
@@ -71,13 +179,39 @@ class App extends React.Component {
     this.setState({[id]: false})
   }
 
+  // saveCard = e => {
+  //   e.preventDefault()
+  //   const itemId = e.currentTarget.id.slice(-1);
+  //   console.log("item:" + itemId);
+  //   const categoryId = "category" + itemId;
+  //   const driverId = "driver" + itemId;
+  //   const categoryInput = this.state[categoryId].value;
+  //   console.log("category:" + categoryId);
+  //   console.log("categoryValue:" + categoryInput);
+  //   const driverInput = document.getElementById(driverId).value;
+  //   console.log("driver:" + driverId);
+  //   console.log("driverValue:" + driverInput);
+
+
+  //   this.setState({[categoryId]: categoryInput, [driverId]: driverInput})
+  // }
   saveCard = e => {
-    const buttonId = e.currentTarget.id.slice(-1);
-    const nameId = "name" + buttonId;
-    const emailId = "email" + buttonId;
-    const nameInput = document.getElementById(nameId).value;
-    const emailInput = document.getElementById(emailId).value;
-    this.setState({[nameId]: nameInput, [emailId]: emailInput})
+    e.preventDefault()
+    const itemId = e.currentTarget.id.slice(-1);
+    console.log("item:" + itemId);
+    const categoryId = "category" + itemId;
+    const driverId = "driver" + itemId;
+    const categoryInput = this.state[categoryId];
+    const driverInput = this.state[driverId];
+    // const categoryInput = document.getElementById(driverId).value;
+    // const driverInput = document.getElementById(driverId).value;
+    console.log("category:" + categoryId);
+    console.log("categoryValue:" + categoryInput);
+    console.log("driver:" + driverId);
+    console.log("driverValue:" + driverInput);
+
+
+    this.setState({[categoryId]: categoryInput, [driverId]: driverInput})
   }
 
   bingoRow(row) {
@@ -98,6 +232,7 @@ class App extends React.Component {
       default:
         renderRow = rowOne;
       }
+
     return ( 
       <Grid container direction="row" justifyContent="center" alignItems="center" spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
         {Array.from(Array(6)).map((_, index) => (
@@ -106,38 +241,85 @@ class App extends React.Component {
         ))}
         {renderRow.map(item => {
           const id = item.id;
-          const nameId = "name" + id;
-          const emailId = "email" + id;
+          const categoryId = "category" + id;
+          const driverId = "driver" + id;
           let results;
-          let buttonText;
 
-          if (((this.state[nameId] === null || this.state[emailId] === null))) {
-            buttonText = "Save";
+          // Start Game - no categories or drivers chosen yet
+          if (((this.state[categoryId] === "" || this.state[driverId] === ""))) {
             results = 
               <>
-                <body variant='body1'>{this.state[nameId]}</body>
-                <body variant="body1">{this.state[emailId]}</body>
+                <body variant="body1">{this.state[driverId]}</body>
+                <body variant='body1'>{this.state[categoryId]}</body>
               </>
           
+          // update categoryID when select item is selected
             return (
               <Grid item xs={3} key={item.id}>
                 <BingoBox id={id}>
                   <CardContent>
-                  <TextField color="warning" variant="standard" id={"name" + id} label="Enter Category"></TextField>
-                  <TextField color="warning" variant="standard" id={"email" + id} label="Enter Driver"></TextField>
-                  {results}
-                  <Button color="inherit" variant="text" id={"button" + item.id} onClick={this.saveCard}>{buttonText}</Button>
+                  <TextField 
+                      color="warning"
+                      variant="standard"
+                      id={"driver" + id}
+                      select 
+                      defaultValue="Select Driver"              
+                    >
+                      {selectDriverItem.map((selectDriverItem) => (
+                        <MenuItem 
+                          key={selectDriverItem.value} 
+                          value={selectDriverItem.value}
+                          onClick={((e) => {
+                            this.setState({
+                              ["driver" + id]: selectDriverItem.value
+                            })
+                          })} 
+                          >
+                          {selectDriverItem.value}
+                        </MenuItem>
+                      ))}
+                    </TextField>
+                    <TextField 
+                      color="warning"
+                      variant="standard"
+                      select 
+                      id={"category" + id}
+                      // helperText={"Select Category"}
+                      value={this.state["category" + id].value} 
+                      defaultValue="Select Category"              
+                    >
+                      {selectCategoryItems.map((selectCategoryItems) => (
+                        <MenuItem
+                          key={selectCategoryItems.value} 
+                          value={selectCategoryItems.value}
+                          onClick={((e) => {
+                            this.setState({
+                              ["category" + id]: selectCategoryItems.value
+                            })
+                          })} 
+                        >
+                          {selectCategoryItems.value}
+                        </MenuItem>
+                      ))}
+                    </TextField>
+                    {/* <TextField color="warning" variant="standard" id={"category" + id} label="Enter Category"></TextField> */}
+                    {/* <TextField color="warning" variant="standard" id={"driver" + id} label="Enter Driver"></TextField> */}
+                    {/* {results} */}
+                    {/* <Button color="inherit" variant="text" id={"button" + item.id} onClick={this.saveCard}>Save</Button> */}
                   </CardContent>
                 </BingoBox>
-                </Grid>
+              </Grid>
             )
-          } else {
+          } else if (this.state[categoryId] !== "" || this.state[driverId] !== "") {
+            // Categories and drivers are selected
             results = 
               <>
-                <body>{this.state[nameId]}</body>
-                <body>{this.state[emailId]}</body>
+                <body>{this.state[driverId]}</body>
+                <body>{this.state[categoryId]}</body>
               </>
 
+            // Categories and drivers are selected, but bingo box has not been marked yet
+            // Player has choice to mark as complete, once this box is marked as complete
             if (this.state[id] === false) {
               return (
                 <Grid item xs={3} key={item.id}>
@@ -149,6 +331,9 @@ class App extends React.Component {
                 </Grid>
               )
             } else {
+
+              // Categories and drivers are selected, but bingo box has not been marked yet
+              // Player has choice to mark incomplete again, if checked off by accident
               return (
                 <Grid item xs={3} key={item.id}>
                   <CheckedBingoBox id={id} onClick={this.markInComplete}>
@@ -159,6 +344,8 @@ class App extends React.Component {
                 </Grid>
               )
             }
+            
+          } else {
             
           }
         })
