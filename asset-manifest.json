@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/sasha-go/f1bingo/static/css/main.ec19348f.css",
+    "main.js": "/sasha-go/f1bingo/static/js/main.4c37068b.js",
+    "static/js/787.f8ecc9b2.chunk.js": "/sasha-go/f1bingo/static/js/787.f8ecc9b2.chunk.js",
+    "index.html": "/sasha-go/f1bingo/index.html",
+    "main.ec19348f.css.map": "/sasha-go/f1bingo/static/css/main.ec19348f.css.map",
+    "main.4c37068b.js.map": "/sasha-go/f1bingo/static/js/main.4c37068b.js.map",
+    "787.f8ecc9b2.chunk.js.map": "/sasha-go/f1bingo/static/js/787.f8ecc9b2.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.ec19348f.css",
+    "static/js/main.4c37068b.js"
+  ]
+}
