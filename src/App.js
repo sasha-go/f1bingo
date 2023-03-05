@@ -12,8 +12,7 @@ const BingoBox = styled(Card)({
   textAlign: 'center',
   background: 'linear-gradient(45deg, red, 50%, gray 90%)',
   color: 'white',
-  width: "275px",
-  height: "225px",
+  height: "140px",
   opacity: 1,
 })
 
@@ -24,8 +23,7 @@ const CheckedBingoBox = styled(Card)({
   textAlign: 'center',
   background: 'linear-gradient(45deg, blue, 50%, gray 90%)',
   color: 'white',
-  width: "275px",
-  height: "225px",
+  height: "140px",
   opacity: 1,
 })
 
@@ -44,7 +42,7 @@ const selectCategoryItems = [
   },
   {
     id: 3,
-    value: "First or Pole",
+    value: "First",
   },
   {
     id: 4,
@@ -64,14 +62,13 @@ const selectCategoryItems = [
   },
   {
     id: 8,
-    value: "Shortest Pit Stop",
+    value: "Shortest Pit",
   },
   {
     id: 9,
-    value: "Select Category",
+    value: "Category",
   },
 ];
-
 const selectDriverItem = [
   {
     value: "Max Verstappen",
@@ -131,10 +128,10 @@ const selectDriverItem = [
     value: "Logan Sargeant",
   },
   {
-    value: "Back up driver",
+    value: "Reserve Driver",
   },
   {
-    value: "Select Driver",
+    value: "Driver",
   },
 ];
 class App extends React.Component {
@@ -218,10 +215,9 @@ class App extends React.Component {
       }
 
     return ( 
-      <Grid container direction="row" justifyContent="center" alignItems="center" spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
+      <Grid container direction="row" justifyContent="center"  alignItems="center" rowSpacing={2} columnSpacing={2} columns={{ xs: 12, sm: 12, md: 12 }} >
         {Array.from(Array(6)).map((_, index) => (
-          <Grid item xs={2} sm={4} md={4} key={index}>
-      </Grid>
+          <Grid item xs={2} sm={4} md={4} key={index} zeroMinWidth></Grid>
         ))}
         {renderRow.map((item) => {
           const id = item.id;
@@ -247,7 +243,7 @@ class App extends React.Component {
                       variant="standard"
                       id={"driver" + id}
                       select 
-                      defaultValue="Select Driver"              
+                      defaultValue="Driver"              
                     >
                       {selectDriverItem.map((selectDriverItem) => (
                         <MenuItem 
@@ -270,7 +266,7 @@ class App extends React.Component {
                       id={"category" + id}
                       // helperText={"Select Category"}
                       value={this.state["category" + id].value} 
-                      defaultValue="Select Category"              
+                      defaultValue="Category"              
                     >
                       {selectCategoryItems.map((selectCategoryItems) => (
                         <MenuItem
