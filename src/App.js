@@ -12,7 +12,7 @@ const BingoBox = styled(Card)({
   textAlign: 'center',
   background: 'linear-gradient(45deg, red, 50%, gray 90%)',
   color: 'white',
-  height: "140px",
+  height: "150px",
   opacity: 1,
 })
 
@@ -23,7 +23,7 @@ const CheckedBingoBox = styled(Card)({
   textAlign: 'center',
   background: 'linear-gradient(45deg, blue, 50%, gray 90%)',
   color: 'white',
-  height: "140px",
+  height: "150px",
   opacity: 1,
 })
 
